@@ -1,0 +1,34 @@
+Vagrant.configure("2") do |config|
+  # Spécifie la box à utiliser
+  config.vm.box = "debian/bullseye64"  # Utilise une box Debian 64-bit
+
+  # Configuration du provider VirtualBox
+  config.vm.provider :virtualbox do |vb|
+    vb.memory = "1024"   # Alloue 1 Go de RAM à la VM
+    vb.cpus = 1          # Utilise 1 CPU
+    vb.name = "ServerVM"  # Nom de la VM dans VirtualBox
+
+    # Configuration du réseau pour la VM
+  end
+
+  config.vm.network "private_network", type: "dhcp"
+
+  # Provisions pour installer les paquets nécessaires sur la VM (Nginx, firewall)
+  config.vm.provision "shell", inline: <<-SHELL
+    # Met à jour la liste des paquets et installe nginx et ufw
+    sudo apt update
+    sudo apt install -y nginx ufw
+
+    # Active et démarre le service nginx
+    sudo systemctl enable nginx
+    sudo systemctl start nginx
+
+    # Active le firewall et autorise les ports HTTP (80), HTTPS (443) et SSH (22)
+    sudo ufw allow 80,443,22/tcp
+    sudo ufw enable
+
+    # Vérification du statut du service nginx
+    sudo systemctl status nginx
+  SHELL
+end
+
