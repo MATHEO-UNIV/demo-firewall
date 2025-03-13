@@ -17,7 +17,7 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", inline: <<-SHELL
     # Met à jour la liste des paquets et installe nginx et ufw
     sudo apt update
-    sudo apt install -y nginx ufw
+    sudo apt install -y nginx ufw nginx-extras
 
     # Active et démarre le service nginx
     sudo systemctl enable nginx
