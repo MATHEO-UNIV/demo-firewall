@@ -1,0 +1,28 @@
+Vagrant.configure("2") do |config|
+  # Spécifie la box à utiliser
+  config.vm.box = "debian/bullseye64"  # Utilise une box Debian 64-bit
+
+  # Configuration du provider VirtualBox
+  config.vm.provider :virtualbox do |vb|
+    vb.memory = "1024"   # Alloue 1 Go de RAM à la VM
+    vb.cpus = 1          # Utilise 1 CPU
+    vb.name = "ClientVM"  # Nom de la VM dans VirtualBox
+
+    # Configuration du réseau pour la VM
+  end
+
+  config.vm.network "private_network", type: "dhcp"
+
+  # Provisions pour installer les paquets nécessaires sur la VM (ping, etc.)
+  config.vm.provision "shell", inline: <<-SHELL
+    # Met à jour la liste des paquets et installe les paquets nécessaires
+    sudo apt-get update
+    sudo apt-get install -y iputils-ping
+
+    # Test de la connectivité réseau (ping)
+    ping -c 4 8.8.8.8
+
+    # Vérification que le service est opérationnel
+    echo "Client VM is ready"
+  SHELL
+end
