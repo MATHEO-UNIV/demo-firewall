@@ -32,6 +32,18 @@ test_connectivity() {
     (cd $CLIENT_DIR && vagrant ssh -c "curl -s 192.168.56.10")
 }
 
+# Fonction pour tester le firewall avec nmap
+test_firewall() {
+    echo "Installation de nmap sur le client..."
+    (cd $CLIENT_DIR && vagrant ssh -c "sudo apt-get update && sudo apt-get install -y nmap")
+    
+    echo "Scan des ports ouverts sur le serveur..."
+    (cd $CLIENT_DIR && vagrant ssh -c "nmap -p- 192.168.56.10")
+    
+    echo "Tentative de connexion SSH depuis une autre IP (devrait échouer)..."
+    (cd $CLIENT_DIR && vagrant ssh -c "nmap --script ssh-brute -p22 192.168.56.10")
+}
+
 # Fonction pour accéder aux VM en SSH
 ssh_server() {
     (cd $SERVER_DIR && vagrant ssh)
@@ -49,8 +61,9 @@ while true; do
     echo "2) Accéder au serveur (SSH)"
     echo "3) Accéder au client (SSH)"
     echo "4) Tester la connexion et le serveur web"
-    echo "5) Arrêter les VM"
-    echo "6) Quitter"
+    echo "5) Tester le firewall (scan des ports)"
+    echo "6) Arrêter les VM"
+    echo "7) Quitter"
     read -p "Choisissez une option : " choice
 
     case $choice in
@@ -58,8 +71,9 @@ while true; do
         2) ssh_server ;;
         3) ssh_client ;;
         4) test_connectivity ;;
-        5) stop_vms ;;
-        6) exit 0 ;;
+        5) test_firewall ;;
+        6) stop_vms ;;
+        7) exit 0 ;;
         *) echo "Option invalide, réessayez." ;;
     esac
 

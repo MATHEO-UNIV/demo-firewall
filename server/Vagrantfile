@@ -13,10 +13,28 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", inline: <<-SHELL
     sudo apt-get update
     sudo apt-get install -y nginx ufw
+
+    # Configuration de la page d'accueil
     echo '<h1>Bienvenue sur le serveur Nginx</h1>' | sudo tee /var/www/html/index.html
+
+    # Activation de Nginx
     sudo systemctl start nginx
     sudo systemctl enable nginx
-    sudo ufw allow 80,443,22/tcp
+
+    # Configuration du firewall UFW
+    sudo ufw default deny incoming  # Bloque toutes les connexions entrantes par défaut
+    sudo ufw default allow outgoing # Autorise les connexions sortantes par défaut
+    
+    # Autorisation des services nécessaires
+    sudo ufw allow 80/tcp   # HTTP
+    sudo ufw allow 443/tcp  # HTTPS
+    sudo ufw allow 22/tcp   # SSH
+    
+    # Ajout d'une règle personnalisée (exemple : autoriser uniquement une IP spécifique en SSH)
+    sudo ufw allow from 192.168.56.11 to any port 22 proto tcp
+
+    # Protection contre le scan de ports
+    sudo ufw logging on
     sudo ufw enable
   SHELL
 end
