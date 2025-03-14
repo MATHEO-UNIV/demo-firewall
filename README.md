@@ -1,17 +1,15 @@
 # Projet : Déploiement sécurisé d'un serveur avec firewall et Nginx
 
 ## Sommaire
+## Sommaire
 - [1. Introduction](#1-introduction)
 - [2. Lancement du projet](#2-lancement-du-projet)
 - [3. Explication des choix techniques](#3-explication-des-choix-techniques)
-- [4. Configuration du serveur](#4-configuration-du-serveur)
-- [5. Configuration du client](#5-configuration-du-client)
-- [6. Résultats et démonstration](#6-résultats-et-démonstration)
-- [7. Tests de connexion et firewall](#7-tests-de-connexion-et-firewall)
-- [8. Difficultés rencontrées et solutions](#8-difficultés-rencontrées-et-solutions)
-- [9. Améliorations possibles](#9-améliorations-possibles)
-- [10. Conclusion](#10-conclusion)
-- [11. Effectif](#11-effectif)
+- [4. Résultats et démonstration](#4-résultats-et-démonstration)
+- [5. Difficultés rencontrées et solutions](#5-difficultés-rencontrées-et-solutions)
+- [6. Améliorations possibles](#6-améliorations-possibles)
+- [7. Conclusion](#7-conclusion)
+- [8. Effectif](#8-effectif)
 
 
 ## 1. Introduction
