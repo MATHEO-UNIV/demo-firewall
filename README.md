@@ -3,16 +3,16 @@
 ## Sommaire
 - [1. Introduction](#1-introduction)
 - [2. Lancement du projet](#2-lancement-du-projet)
-- [3. Structure du projet](#3-structure-du-projet)
-- [4. Choix techniques](#4-choix-techniques)
-- [5. Configuration du serveur](#5-configuration-du-serveur)
-- [6. Configuration du client](#6-configuration-du-client)
-- [7. Démonstration du fonctionnement](#7-démonstration-du-fonctionnement)
-- [8. Résultats attendus](#8-résultats-attendus)
-- [9. Tests de connexion et firewall](#9-tests-de-connexion-et-firewall)
-- [10. Difficultés rencontrées](#10-difficultés-rencontrées)
-- [11. Améliorations possibles](#11-améliorations-possibles)
-- [12. Conclusion](#12-conclusion)
+- [3. Explication des choix techniques](#3-explication-des-choix-techniques)
+- [4. Configuration du serveur](#4-configuration-du-serveur)
+- [5. Configuration du client](#5-configuration-du-client)
+- [6. Résultats et démonstration](#6-résultats-et-démonstration)
+- [7. Tests de connexion et firewall](#7-tests-de-connexion-et-firewall)
+- [8. Difficultés rencontrées et solutions](#8-difficultés-rencontrées-et-solutions)
+- [9. Améliorations possibles](#9-améliorations-possibles)
+- [10. Conclusion](#10-conclusion)
+- [11. Effectif](#11-effectif)
+
 
 ## 1. Introduction
 Ce projet met en place un serveur Debian sécurisé avec un firewall UFW et un serveur web Nginx. Un client Debian est également déployé pour tester la connectivité et la sécurité du serveur via un script d'automatisation.
