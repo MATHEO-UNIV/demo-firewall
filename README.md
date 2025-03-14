@@ -2,16 +2,16 @@
 
 ## Sommaire
 - [1. Introduction](#1-introduction)
-- [2. Prérequis](#2-prérequis)
-- [3. Installation et Lancement](#3-installation-et-lancement)
-- [4. Structure du Projet](#4-structure-du-projet)
-- [5. Choix Techniques](#5-choix-techniques)
-- [6. Configuration du Serveur](#6-configuration-du-serveur)
-- [7. Configuration du Client](#7-configuration-du-client)
-- [8. Démonstration du Fonctionnement](#8-démonstration-du-fonctionnement)
-- [9. Tests de Sécurité et Firewall](#9-tests-de-sécurité-et-firewall)
-- [10. Difficultés Rencontrées](#10-difficultés-rencontrées)
-- [11. Améliorations Possibles](#11-améliorations-possibles)
+- [2. Lancement du projet](#2-lancement-du-projet)
+- [3. Structure du projet](#3-structure-du-projet)
+- [4. Choix techniques](#4-choix-techniques)
+- [5. Configuration du serveur](#5-configuration-du-serveur)
+- [6. Configuration du client](#6-configuration-du-client)
+- [7. Démonstration du fonctionnement](#7-démonstration-du-fonctionnement)
+- [8. Résultats attendus](#8-résultats-attendus)
+- [9. Tests de connexion et firewall](#9-tests-de-connexion-et-firewall)
+- [10. Difficultés rencontrées](#10-difficultés-rencontrées)
+- [11. Améliorations possibles](#11-améliorations-possibles)
 - [12. Conclusion](#12-conclusion)
 
 ## 1. Introduction
