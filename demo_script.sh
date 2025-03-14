@@ -38,7 +38,7 @@ test_firewall() {
     (cd $CLIENT_DIR && vagrant ssh -c "nmap -p- 192.168.56.10")
     
     echo "Tentative de connexion SSH depuis une autre IP (devrait échouer)..."
-    (cd $CLIENT_DIR && vagrant ssh -c "nmap --script ssh-brute -p22 192.168.56.10")
+    (cd $CLIENT_DIR && vagrant ssh -c "nmap --script ssh-brute -p22 192.168.56.15")
 }
 
 # Fonction pour accéder aux VM en SSH
