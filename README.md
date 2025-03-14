@@ -1,18 +1,18 @@
 # Projet : Déploiement sécurisé d'un serveur avec firewall et Nginx
 
 ## Sommaire
-1. [Introduction](#introduction)
-2. [Prérequis](#prérequis)
-3. [Installation et Lancement](#installation-et-lancement)
-4. [Structure du Projet](#structure-du-projet)
-5. [Choix Techniques](#choix-techniques)
-6. [Configuration du Serveur](#configuration-du-serveur)
-7. [Configuration du Client](#configuration-du-client)
-8. [Démonstration du Fonctionnement](#démonstration-du-fonctionnement)
-9. [Tests de Sécurité et Firewall](#tests-de-sécurité-et-firewall)
-10. [Difficultés Rencontrées](#difficultés-rencontrées)
-11. [Améliorations Possibles](#améliorations-possibles)
-12. [Conclusion](#conclusion)
+- [1. Introduction](#1-introduction)
+- [2. Prérequis](#2-prérequis)
+- [3. Installation et Lancement](#3-installation-et-lancement)
+- [4. Structure du Projet](#4-structure-du-projet)
+- [5. Choix Techniques](#5-choix-techniques)
+- [6. Configuration du Serveur](#6-configuration-du-serveur)
+- [7. Configuration du Client](#7-configuration-du-client)
+- [8. Démonstration du Fonctionnement](#8-démonstration-du-fonctionnement)
+- [9. Tests de Sécurité et Firewall](#9-tests-de-sécurité-et-firewall)
+- [10. Difficultés Rencontrées](#10-difficultés-rencontrées)
+- [11. Améliorations Possibles](#11-améliorations-possibles)
+- [12. Conclusion](#12-conclusion)
 
 ## 1. Introduction
 Ce projet met en place un serveur Debian sécurisé avec un firewall UFW et un serveur web Nginx. Un client Debian est également déployé pour tester la connectivité et la sécurité du serveur via un script d'automatisation.
