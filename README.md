@@ -1,5 +1,19 @@
 # Projet : Déploiement sécurisé d'un serveur avec firewall et Nginx
 
+## Sommaire
+1. [Introduction](#introduction)
+2. [Prérequis](#prérequis)
+3. [Installation et Lancement](#installation-et-lancement)
+4. [Structure du Projet](#structure-du-projet)
+5. [Choix Techniques](#choix-techniques)
+6. [Configuration du Serveur](#configuration-du-serveur)
+7. [Configuration du Client](#configuration-du-client)
+8. [Démonstration du Fonctionnement](#démonstration-du-fonctionnement)
+9. [Tests de Sécurité et Firewall](#tests-de-sécurité-et-firewall)
+10. [Difficultés Rencontrées](#difficultés-rencontrées)
+11. [Améliorations Possibles](#améliorations-possibles)
+12. [Conclusion](#conclusion)
+
 ## 1. Introduction
 Ce projet met en place un serveur Debian sécurisé avec un firewall UFW et un serveur web Nginx. Un client Debian est également déployé pour tester la connectivité et la sécurité du serveur via un script d'automatisation.
 
@@ -90,4 +104,7 @@ Ce projet démontre comment déployer un serveur sécurisé avec un firewall bie
 
 L'approche adoptée pourrait être utilisée en entreprise pour protéger des serveurs exposés à Internet.
 
+## Effectif
 
+1. Fourneaux Mathéo
+2. Francoise Paul 
