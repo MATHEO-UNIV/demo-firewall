@@ -1,7 +1,6 @@
 # Projet : Déploiement sécurisé d'un serveur avec firewall et Nginx
 
 ## Sommaire
-## Sommaire
 - [1. Introduction](#1-introduction)
 - [2. Lancement du projet](#2-lancement-du-projet)
 - [3. Explication des choix techniques](#3-explication-des-choix-techniques)
