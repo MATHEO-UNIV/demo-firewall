@@ -104,7 +104,7 @@ Ce projet démontre comment déployer un serveur sécurisé avec un firewall bie
 
 L'approche adoptée pourrait être utilisée en entreprise pour protéger des serveurs exposés à Internet.
 
-## Effectif
+## 8. Effectif
 
 1. Fourneaux Mathéo
 2. Francoise Paul 
