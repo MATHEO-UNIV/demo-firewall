@@ -1,32 +1,68 @@
 #!/bin/bash
 
-# Aller dans le dossier du serveur et démarrer la VM
-cd server/
-vagrant up
+# Chemins des dossiers des VM
+SERVER_DIR="server"
+CLIENT_DIR="client"
 
-# Aller dans le dossier du client et démarrer la VM
-cd ../client/
-vagrant up
+# Fonction pour démarrer les VMs avec VirtualBox
+start_vms() {
+    echo "Démarrage des machines avec VirtualBox..."
+    (cd $SERVER_DIR && vagrant up --provider=virtualbox)
+    (cd $CLIENT_DIR && vagrant up --provider=virtualbox)
+    echo "Les machines sont prêtes !"
+}
 
-# Attendre quelques secondes pour s'assurer que les machines sont prêtes
-sleep 10
+# Fonction pour arrêter les VMs
+stop_vms() {
+    echo "Arrêt des machines..."
+    (cd $SERVER_DIR && vagrant halt)
+    (cd $CLIENT_DIR && vagrant halt)
+    echo "Machines arrêtées."
+}
 
-# Tester la connectivité entre les machines
-echo "Test de connectivité : ping du client vers le serveur"
-vagrant ssh -c "ping -c 4 192.168.56.10" client
+# Fonction pour tester la connectivité réseau et le serveur web
+test_connectivity() {
+    echo "Test de connexion entre les machines..."
+    (cd $CLIENT_DIR && vagrant ssh -c "ping -c 4 192.168.56.10")
+    
+    echo "Test de l'en-tête HTTP du serveur web..."
+    (cd $CLIENT_DIR && vagrant ssh -c "curl -I 192.168.56.10")
+    
+    echo "Test du contenu de la page web..."
+    (cd $CLIENT_DIR && vagrant ssh -c "curl -s 192.168.56.10")
+}
 
-# Tester l'accès à la page web du serveur
-echo "Test de l'accès web : curl depuis le client vers le serveur"
-vagrant ssh -c "curl -I http://192.168.56.10" client
+# Fonction pour accéder aux VM en SSH
+ssh_server() {
+    (cd $SERVER_DIR && vagrant ssh)
+}
 
-# Tester le firewall (exemple : bloquer le ping sur le serveur)
-echo "Ajout d'une règle firewall sur le serveur : blocage ICMP"
-vagrant ssh -c "sudo ufw deny icmp" server
+ssh_client() {
+    (cd $CLIENT_DIR && vagrant ssh)
+}
 
-# Vérifier que le ping ne passe plus
-echo "Vérification du blocage du ping"
-vagrant ssh -c "ping -c 4 192.168.56.10" client || echo "Ping bloqué avec succès"
+# Menu interactif
+while true; do
+    clear
+    echo "### Menu de gestion des VM ###"
+    echo "1) Démarrer les VM (VirtualBox)"
+    echo "2) Accéder au serveur (SSH)"
+    echo "3) Accéder au client (SSH)"
+    echo "4) Tester la connexion et le serveur web"
+    echo "5) Arrêter les VM"
+    echo "6) Quitter"
+    read -p "Choisissez une option : " choice
 
-# Nettoyage : réactiver le ping
-echo "Réactivation du ping"
-vagrant ssh -c "sudo ufw allow icmp" server
+    case $choice in
+        1) start_vms ;;
+        2) ssh_server ;;
+        3) ssh_client ;;
+        4) test_connectivity ;;
+        5) stop_vms ;;
+        6) exit 0 ;;
+        *) echo "Option invalide, réessayez." ;;
+    esac
+
+    read -p "Appuyez sur Entrée pour continuer..."
+done
+
