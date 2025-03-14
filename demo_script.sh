@@ -33,10 +33,7 @@ test_connectivity() {
 }
 
 # Fonction pour tester le firewall avec nmap
-test_firewall() {
-    echo "Installation de nmap sur le client..."
-    (cd $CLIENT_DIR && vagrant ssh -c "sudo apt-get update && sudo apt-get install -y nmap")
-    
+test_firewall() {    
     echo "Scan des ports ouverts sur le serveur..."
     (cd $CLIENT_DIR && vagrant ssh -c "nmap -p- 192.168.56.10")
     

@@ -15,10 +15,58 @@ Vagrant.configure("2") do |config|
     sudo apt-get install -y nginx ufw
 
     # Configuration de la page d'accueil
-    echo '<h1>Bienvenue sur le serveur Nginx</h1>' | sudo tee /var/www/html/index.html
+    echo '<h1>Bienvenue sur le serveur Nginx sécurisé</h1>' | sudo tee /var/www/html/index.html
+
+    # Configuration sécurisée de Nginx
+    sudo tee /etc/nginx/nginx.conf > /dev/null <<EOF
+    user www-data;
+    worker_processes auto;
+    pid /run/nginx.pid;
+    include /etc/nginx/modules-enabled/*.conf;
+
+    events {
+        worker_connections 1024;
+    }
+
+    http {
+        server_tokens off;  # Cache la version de Nginx
+        sendfile on;
+        tcp_nopush on;
+        tcp_nodelay on;
+        keepalive_timeout 65;
+        types_hash_max_size 2048;
+
+        include /etc/nginx/mime.types;
+        default_type application/octet-stream;
+
+        ssl_protocols TLSv1.2 TLSv1.3; # Désactive SSL et TLS < 1.2
+        ssl_prefer_server_ciphers on;
+
+        server {
+            listen 80 default_server;
+            listen [::]:80 default_server;
+            server_name _;
+
+            # Désactive certaines méthodes HTTP dangereuses
+            limit_except GET HEAD POST { deny all; }
+
+            # Protection contre le clickjacking et XSS
+            add_header X-Frame-Options DENY;
+            add_header X-Content-Type-Options nosniff;
+            add_header X-XSS-Protection "1; mode=block";
+
+            root /var/www/html;
+            index index.html;
+
+            location / {
+                try_files $uri $uri/ =404;
+            }
+        }
+    }
+    EOF
 
     # Activation de Nginx
-    sudo systemctl start nginx
+    sudo systemctl restart nginx
     sudo systemctl enable nginx
 
     # Configuration du firewall UFW
@@ -28,7 +76,7 @@ Vagrant.configure("2") do |config|
     # Autorisation des services nécessaires
     sudo ufw allow 80/tcp   # HTTP
     sudo ufw allow 443/tcp  # HTTPS
-    sudo ufw allow 22/tcp   # SSH
+    sudo ufw allow from 192.168.56.11 to any port 22 proto tcp   # SSH
     
     # Ajout d'une règle personnalisée (exemple : autoriser uniquement une IP spécifique en SSH)
     sudo ufw allow from 192.168.56.11 to any port 22 proto tcp
@@ -36,6 +84,10 @@ Vagrant.configure("2") do |config|
     # Protection contre le scan de ports
     sudo ufw logging on
     sudo ufw enable
+    sudo ufw deny from any to any
+    
+    # Protection brute-force SSH
+    sudo ufw limit ssh
   SHELL
 end
 
